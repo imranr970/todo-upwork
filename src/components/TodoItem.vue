@@ -1,13 +1,13 @@
 <template>
 
-    <TodoItemEdit :item="item" v-if="isEditing()" />
+    <TodoItemEdit :item="item" v-if="isEditing" />
     <TodoItemView :item="item" v-else />
 
 </template>
 
 <script>
-
-    import { ref } from 'vue'
+    import { computed } from 'vue'
+    import { useStore } from 'vuex'
 
     import TodoItemEdit from './TodoItemEdit'
     import TodoItemView from './TodoItemView'
@@ -26,13 +26,14 @@
             }
         },
 
-        setup() {
+        setup(props) {
 
-            const editing = ref(false)
+            const store = useStore()
 
-            const isEditing = () => {
-                return editing.value
-            }
+            const isEditing = computed(() => {
+                const editingItem = store.getters.editingItem
+                return editingItem.item.id == props.item.id && editingItem.edit == true
+            }) 
 
             return { 
                 isEditing

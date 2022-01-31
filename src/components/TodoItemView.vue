@@ -22,7 +22,7 @@
             icon="pen" 
             class="text-dark-green text-sm cursor-pointer" 
             title="Edit item" 
-            @click.prevent="setEditing({ item })"
+            @click.prevent="setEditing({ item, edit: true })"
             />
             
         </span>
@@ -52,9 +52,9 @@
                 { 'text-gray-400': item.completed_at != null }
             ]
 
-            const markCompleteItem = ({ id, checked }) => store.commit('markCompleteItem', { id, checked })
+            const markCompleteItem = (data) => store.commit('markCompleteItem', data)
 
-            const setEditing = () => {}
+            const setEditing = (data) => store.commit('setItemEditing', data)
 
             return {
                 setEditing,

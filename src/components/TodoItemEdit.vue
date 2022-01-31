@@ -1,12 +1,13 @@
 <template>
 
-    <form action="#" @submit.prevent="saveEditTodo">
+    <form action="#" @submit.prevent="updateTodo">
         
         <div class="flex items-center box-border">
             
             <input 
             type="text" 
-            class="border block w-full focus:outline-none p-1 flex-grow ">
+            v-model.trim="item.title"
+            class="border block w-full focus:outline-none p-1 flex-grow">
 
             <span class="flex text-sm">
                 
@@ -18,7 +19,7 @@
 
                 <button 
                 class="bg-white text-dark-green border hover:opacity-95 p-1 text-center transition ease-in duration-150" 
-                @click.prevent="setEditing({ state: false })">
+                @click.prevent="setEditing({ edit: false })">
                     Cancel  
                 </button>
             
@@ -32,13 +33,24 @@
 
 <script>
 
+import { useStore } from 'vuex'
 
 export default {
 
     setup() {
 
-        const saveEditTodo = () => {}
-        return { saveEditTodo }
+        const store = useStore()
+
+        const item = { ...store.getters.editingItem.item }
+
+        const updateTodo = () => store.commit('updateTodo')
+        const setEditing = (data) => store.commit('setItemEditing', data)
+
+        return { 
+            item,
+            updateTodo,
+            setEditing
+        }
 
     }
 }

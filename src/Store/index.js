@@ -6,11 +6,16 @@ export default Vuex.createStore({
 
     state: {
         item: null,
-        items: []
+        items: [],
+        editingItem: {
+            item: {},
+            edit: false
+        }
     },
     getters: {
         item: (state) => state.item,
         items: (state) => state.items,
+        editingItem: (state) => state.editingItem,
     },
     mutations: {
 
@@ -36,6 +41,18 @@ export default Vuex.createStore({
             const itemIndex = state.items.findIndex(item => item.id == id)
             const item = state.items[itemIndex]
             checked ? item.completed_at = new Date() : item.completed_at = null
+        },
+
+        setItemEditing(state, { item, edit }) {
+            state.editingItem = {
+                item: item || {},
+                edit
+            }
+        },
+
+        updateTodo(state, editedItem) {
+            const itemIndex = state.items.findIndex(item => state.editingItem.item.id == item.id)
+            state.items[itemIndex].title = editedItem
         }
 
     },
