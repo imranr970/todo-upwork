@@ -50,12 +50,17 @@ export default Vuex.createStore({
             }
         },
 
-        updateTodo(state, editedItem) {
-            const itemIndex = state.items.findIndex(item => state.editingItem.item.id == item.id)
+        updateTodo(state, {itemIndex, editedItem}) {
             state.items[itemIndex].title = editedItem
         }
 
     },
-    actions: {}
+    actions: {
+        updateTodo({ state, commit }, editedItem) {
+            const itemIndex = state.items.findIndex(item => state.editingItem.item.id == item.id)
+            commit('updateTodo', { itemIndex, editedItem })
+            commit('setItemEditing', { edit: false })
+        }
+    }
 
 })

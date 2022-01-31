@@ -33,6 +33,7 @@
 
 <script>
 
+import { ref } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
@@ -41,9 +42,9 @@ export default {
 
         const store = useStore()
 
-        const item = { ...store.getters.editingItem.item }
+        const item = ref({ ...store.getters.editingItem.item })
 
-        const updateTodo = () => store.commit('updateTodo')
+        const updateTodo = () => store.dispatch('updateTodo', item.value.title)
         const setEditing = (data) => store.commit('setItemEditing', data)
 
         return { 
