@@ -1,6 +1,6 @@
 <template>
 
-    <form action="#" @submit.prevent="addTodo">
+    <form action="#" @submit.prevent="addItem">
 
         <div class="card shadow-card p-4 text-black flex">
         
@@ -38,11 +38,11 @@
                 set: (value) => store.commit('setItem', value)
             })
 
-            const addTodo = () => store.commit('addTodo')
+            const addItem = () => store.commit('addItem')
 
             return {
                 item,
-                addTodo,
+                addItem,
             }
         }
     }

@@ -10,7 +10,8 @@
             type="checkbox" 
             name="" 
             :id="item.id" 
-            :checked="item.completed_at != null" 
+            :checked="item.completed_at != null"
+            @change="markCompleteItem({ id: item.id, checked: $event.target.checked })" 
             />
             {{ item.title }}
         </label>
@@ -32,6 +33,7 @@
 </template>
 
 <script>
+    import { useStore } from 'vuex'
     export default {
         
         props: {
@@ -43,15 +45,20 @@
 
         setup() {
             
+            const store = useStore()
+
             const isCompletedClasses = (item) => [
                 { 'line-through': item.completed_at != null },
                 { 'text-gray-400': item.completed_at != null }
             ]
 
+            const markCompleteItem = ({ id, checked }) => store.commit('markCompleteItem', { id, checked })
+
             const setEditing = () => {}
 
             return {
                 setEditing,
+                markCompleteItem,
                 isCompletedClasses
             }
 

@@ -13,7 +13,12 @@ export default Vuex.createStore({
         items: (state) => state.items,
     },
     mutations: {
-        addTodo(state) {
+
+        addItem(state) {
+            
+            if(state.item == null || state.item == '') return false
+            if(state.items.find(item => item.title.toLowerCase() == state.item.toLowerCase())) return false
+
             const item = {
                 id: Math.random(1).toString().substring(1, 4),
                 title: state.item,
@@ -25,6 +30,12 @@ export default Vuex.createStore({
 
         setItem(state, item) {
             state.item = item
+        },
+
+        markCompleteItem(state, { id, checked }) {
+            const itemIndex = state.items.findIndex(item => item.id == id)
+            const item = state.items[itemIndex]
+            checked ? item.completed_at = new Date() : item.completed_at = null
         }
 
     },
