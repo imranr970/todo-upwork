@@ -1,6 +1,6 @@
 <template>
 
-    <TodoItemEdit :item="item" v-if="isEditing" />
+    <TodoItemEdit :item="item" v-if="isEditing()" />
     <TodoItemView :item="item" v-else />
 
 </template>

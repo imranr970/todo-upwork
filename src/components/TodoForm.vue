@@ -24,12 +24,21 @@
 </template>
 
 <script>
-    import { ref } from 'vue'
+    
+    import { computed } from 'vue'
+    import { useStore } from "vuex"
+
     export default {
         setup() {
+            
+            const store = useStore()
 
-            const item = ref(null)
-            const addTodo = () => {}
+            const item = computed({
+                get: () => store.getters.item,
+                set: (value) => store.commit('setItem', value)
+            })
+
+            const addTodo = () => store.commit('addTodo')
 
             return {
                 item,

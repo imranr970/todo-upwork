@@ -1,6 +1,6 @@
 <template>
  
-  <ul class="m-0 p-0" v-if="list.length" ref="infiniteScroll" id="infiniteScroll">
+  <ul class="m-0 p-0" v-if="list.length">
 
     <li 
     v-for="item in list"
@@ -25,7 +25,8 @@
 
 <script>
   
-  import { ref, reactive } from 'vue'
+  import { ref } from 'vue'
+  import { useStore } from 'vuex'
   import TodoItem from './TodoItem'
 
   export default {
@@ -36,13 +37,11 @@
 
     setup() {
 
+        const store = useStore()
+
         const loading = ref(false)
 
-        const list = reactive({
-            id: 1,
-            title: 'Complete the upwork task.',
-            isCompleted: false,
-        })
+        const list = store.getters.items
 
         return { loading, list }
 

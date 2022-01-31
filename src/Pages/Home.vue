@@ -41,7 +41,6 @@ export default {
     setup() {
         
         const loading = ref(false)
-
         return {
             loading
         }

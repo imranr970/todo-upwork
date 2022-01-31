@@ -1,42 +1,65 @@
 <template>
 
-    <form action="#" @submit.prevent="saveEditTodo">
-        
-        <div class="flex items-center box-border">
-            
+    <div class="flex">
+
+        <label 
+        :for="item.id" 
+        :class="isCompletedClasses(item)" 
+        class="flex-grow">
             <input 
-            type="text" 
-            class="border block w-full focus:outline-none p-1 flex-grow ">
-            
-            <span class="flex text-sm">
-                
-                <button type="submit" class="bg-dark-green text-white border border-dark-green hover:opacity-95 p-1 text-center transition ease-in duration-150 mx-0.5">
-                Edit
-                </button>
+            type="checkbox" 
+            name="" 
+            :id="item.id" 
+            :checked="item.completed_at != null" 
+            />
+            {{ item.title }}
+        </label>
 
-                <button class="bg-white text-dark-green border hover:opacity-95 p-1 text-center transition ease-in duration-150" @click.prevent="setEditing({ state: false })">
-                Cancel  
-                </button>
+        <span>
             
-            </span>
+            <FontIcon 
+            icon="pen" 
+            class="text-dark-green text-sm cursor-pointer" 
+            title="Edit item" 
+            @click.prevent="setEditing({ item })"
+            />
             
-        </div>
+        </span>
 
-    </form>
+    </div>
 
+    
 </template>
 
 <script>
+    export default {
+        
+        props: {
+            item: {
+                required: true,
+                type: Object
+            }
+        },
 
+        setup() {
+            
+            const isCompletedClasses = (item) => [
+                { 'line-through': item.completed_at != null },
+                { 'text-gray-400': item.completed_at != null }
+            ]
 
-export default {
+            const setEditing = () => {}
 
-    setup() {
+            return {
+                setEditing,
+                isCompletedClasses
+            }
 
-        const saveEditTodo = () => {}
-        return { saveEditTodo }
+        }
 
     }
-}
-
 </script>
+
+<style lang="scss" scoped>
+
+</style>
