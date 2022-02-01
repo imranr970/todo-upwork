@@ -4,10 +4,6 @@
 
         <h1 class="text-5xl text-center font-bold py-3 pb-6">Vue Todo App</h1>    
 
-        <div class="card text-red-500 my-4">
-            Error message
-        </div>
-
         <TodoForm />    
 
         <template v-if="loading">

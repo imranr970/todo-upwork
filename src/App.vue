@@ -1,6 +1,6 @@
 <template>
 
-   <div class="app" style="min-height: 600px">
+   <div class="app">
       <RouterView />
    </div>
 
