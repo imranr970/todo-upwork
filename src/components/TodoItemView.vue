@@ -5,7 +5,7 @@
         <label 
         :for="item.id" 
         :class="isCompletedClasses(item)" 
-        class="flex-grow">
+        class="flex-grow cursor-move">
             <input 
             type="checkbox" 
             name="" 
@@ -52,7 +52,7 @@
                 { 'text-gray-400': item.completed_at != null }
             ]
 
-            const markCompleteItem = (data) => store.commit('markCompleteItem', data)
+            const markCompleteItem = (data) => store.dispatch('markCompleteItem', data)
 
             const setEditing = (data) => store.commit('setItemEditing', data)
 

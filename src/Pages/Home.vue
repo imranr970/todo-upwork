@@ -6,15 +6,7 @@
 
         <TodoForm />    
 
-        <template v-if="loading">
-            <div class="card text-black my-4">
-                <FontIcon icon="circle-notch" class="fa-spin" />
-            </div>
-        </template>
-
-        <template v-else>
-            <TodoList />
-        </template>
+        <TodoList />
 
     </div>
 
@@ -22,25 +14,17 @@
 
 <script>
 
-import { ref } from 'vue'
 import TodoList from '@/components/TodoList'
 import TodoForm from '@/components/TodoForm'
 
 export default {
 
     name: 'Home',
+
     components: {
         TodoList,
         TodoForm
-    },
-
-    setup() {
-        
-        const loading = ref(false)
-        return {
-            loading
-        }
     }
-  
+    
 }
 </script>
